@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- ============================================
+     MAHVE — صفحه تایید سفارش (Success Page)
+     این صفحه بعد از تکمیل خرید نمایش داده می‌شود
+     ============================================ -->
+<html lang="en">
+<head>
+  <!-- ========== تنظیمات پایه ========== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — MAHVE</title>
+
+  <!-- ========== فونت‌های گوگل ========== -->
+  <!-- Cinzel: لوگو | Playfair: تیترها | Inter: متن بدنه -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ========== استایل اصلی سایت ========== -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<!-- کلاس success-body: پس‌زمینه و چیدمان وسط‌چین این صفحه را کنترل می‌کند -->
+<body class="success-body">
+
+  <!-- ========== محتوای اصلی ========== -->
+  <main class="success-page">
+    <div class="success-card">
+
+      <!-- آیکون تیک سبز (با انیمیشن pop ظاهر می‌شود) -->
+      <div class="success-card__icon">✓</div>
+
+      <!-- برچسب کوچک بالای تیتر -->
+      <span class="success-card__eyebrow">Thank You</span>
+
+      <!-- تیتر اصلی صفحه -->
+      <h1 class="success-card__title">Your Order is Confirmed</h1>
+
+      <!-- متن توضیحی -->
+      <p class="success-card__text">A confirmation has been sent to your email. Our team will contact you shortly regarding delivery.</p>
+
+      <!-- ========== شماره سفارش ========== -->
+      <!-- مقدار این قسمت توسط script.js از localStorage خوانده و پر می‌شود -->
+      <div class="success-card__order">
+        <span>Order Number</span>
+        <strong id="orderNumber">—</strong>
+      </div>
+
+      <!-- دکمه بازگشت به صفحه اصلی -->
+      <a href="index.html" class="btn btn--gold">Return to Home</a>
+
+    </div>
+  </main>
+
+  <!-- ========== اسکریپت اصلی ========== -->
+  <!-- initSuccess() در این فایل، شماره سفارش را از localStorage می‌خواند
+       و داخل #orderNumber قرار می‌دهد -->
+  <script src="script.js"></script>
+</body>
+</html>

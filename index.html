@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAHVE — Born of Heritage, Made for Eternity</title>
+
+  <!-- توضیحات متا برای سئو و نمایش در نتایج جستجو -->
+  <meta name="description" content="MAHVE — Timeless jewelry inspired by Persian heritage. Beauty for today. A legacy for eternity." />
+
+  <!-- پیش‌بارگذاری دامنه‌های فونت گوگل برای کاهش تأخیر اتصال -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- بارگذاری فونت‌های سفارشی سایت (Cinzel / Playfair Display / Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- فایل استایل اصلی سایت -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       پیش‌بارگذار (Preloader)
+       هنگام بارگذاری اولیه صفحه نمایش داده می‌شود و سپس
+       با جاوااسکریپت محو می‌شود.
+  ============================================================ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <span class="preloader__logo">MAHVE</span>
+      <div class="preloader__line"><span></span></div>
+      <span class="preloader__tagline">Born of Heritage, Made for Eternity</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       نشانگر ماوس سفارشی (Cursor)
+       دو المان: یک دایره بزرگ‌تر و یک نقطه کوچک مرکزی.
+       موقعیت آن‌ها با جاوااسکریپت دنبال ماوس حرکت می‌کند.
+  ============================================================ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- ============================================================
+       هدر / نوار ناوبری اصلی
+       کلاس nav (بدون nav--solid) یعنی هدر شفاف است و
+       پس از اسکرول با JS کلاس solid اضافه می‌شود.
+  ============================================================ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+
+      <!-- لوگوی برند -->
+      <a href="index.html" class="nav__logo">MAHVE</a>
+
+      <!-- منوی لینک‌های اصلی (لینک‌های داخلی با # به بخش‌های همین صفحه) -->
+      <nav class="nav__links">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="products.html" class="nav__link">Collections</a>
+        <a href="#story" class="nav__link">Story</a>
+        <a href="#craft" class="nav__link">Craftsmanship</a>
+        <a href="#contact" class="nav__link">Contact</a>
+        <a href="admin.html" class="nav__link">Admin</a>
+      </nav>
+
+      <!-- دکمه‌های کنشی هدر -->
+      <div class="nav__actions">
+
+        <!-- دکمه علاقه‌مندی‌ها + شمارنده -->
+        <button class="nav__icon" id="wishlistBtn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+          <span class="badge" id="wishlistCount">0</span>
+        </button>
+
+        <!-- دکمه سبد خرید + شمارنده -->
+        <button class="nav__icon" id="cartBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="badge" id="cartCount">0</span>
+        </button>
+
+        <!-- دکمه منوی همبرگری موبایل -->
+        <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       بخش قهرمان (Hero)
+       تصویر پس‌زمینه تمام‌صفحه + عنوان و دکمه‌های اصلی.
+       خطوط عنوان با کلاس reveal-line برای انیمیشن ورود استفاده می‌شوند.
+  ============================================================ -->
+  <section class="hero" id="hero">
+
+    <!-- تصویر پس‌زمینه -->
+    <div class="hero__bg">
+      <img src="./photos/Emerald Velvet and Antique Gold Elegance.png" alt="Luxury jewelry" />
+    </div>
+
+    <!-- لایه تاریک روی تصویر برای خوانایی بهتر متن -->
+    <div class="hero__overlay"></div>
+
+    <!-- محتوای متنی روی تصویر -->
+    <div class="hero__content">
+      <span class="hero__eyebrow">MAHVE — Fine Jewelry</span>
+      <h1 class="hero__title">
+        <span class="reveal-line">Born of Heritage,</span>
+        <span class="reveal-line">Made for Eternity.</span>
+      </h1>
+      <p class="hero__sub">Timeless pieces inspired by the artistry of ancient Persia — crafted to become a legacy.</p>
+
+      <!-- دکمه‌های فراخوان به اقدام (CTA) -->
+      <div class="hero__actions">
+        <a href="products.html" class="btn btn--gold">Explore Collections</a>
+        <a href="#story" class="btn btn--ghost">Our Story</a>
+      </div>
+    </div>
+
+    <!-- نشانگر اسکرول پایین بخش -->
+    <div class="hero__scroll">Scroll</div>
+  </section>
+
+  <!-- ============================================================
+       بخش داستان برند (Our Story)
+       چیدمان دوستونی: تصویر در یک ستون، متن در ستون دیگر.
+  ============================================================ -->
+  <section class="story" id="story">
+    <div class="container story__grid">
+
+      <!-- ستون تصویر + برچسب "Since 2016" -->
+      <div class="story__media">
+        <img src="./photos/Mahve Fine Jewelry Emblem.png" alt="Persian craftsmanship" />
+        <div class="story__badge">Since 2016</div>
+      </div>
+
+      <!-- ستون متن داستان -->
+      <div class="story__text">
+        <span class="section-eyebrow">Our Story</span>
+        <h2 class="section-title">A Legacy Written in Gold</h2>
+        <p>Inspired by the timeless beauty of ancient Persia, MAHVE was born from a deep appreciation for heritage, artistry, and the enduring power of beauty.</p>
+        <p>From the intricate patterns of Persian architecture to the brilliance of precious metals and gemstones, every detail carries a story of elegance, mystery, and craftsmanship.</p>
+        <p>At MAHVE, we believe jewelry is more than an ornament. It is an expression of identity, a reflection of individuality, and a timeless treasure that carries memories from one generation to the next.</p>
+        <p>Blending the richness of Persian heritage with a contemporary vision of luxury, we create pieces that celebrate individuality while honoring the beauty of tradition.</p>
+
+        <!-- پاراگراف پایانی با تأکید ویژه -->
+        <p class="story__closing">Every creation is designed to become more than a moment of brilliance. It is a legacy to be treasured.</p>
+
+        <!-- امضای برند -->
+        <div class="story__signature">MAHVE — Beauty for today. A legacy for eternity.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       بخش مجموعه‌ها (Collections)
+       چهار کارت دسته‌بندی با لینک به صفحه محصولات و پارامتر cat.
+  ============================================================ -->
+  <section class="collections" id="collections">
+    <div class="container">
+
+      <!-- سربرگ بخش -->
+      <div class="section-head">
+        <span class="section-eyebrow">Collections</span>
+        <h2 class="section-title">Explore Our World</h2>
+      </div>
+
+      <!-- شبکه کارت‌های دسته‌بندی -->
+      <div class="collections__grid">
+
+        <!-- کارت حلقه‌ها -->
+        <a href="products.html?cat=rings" class="collection-card">
+          <img src="./photos/Mahve Fine Jewelry_ Emerald Velvet Rings (1).png" alt="Rings" />
+          <div class="collection-card__overlay"><h3>Rings</h3><span>View Collection</span></div>
+        </a>
+
+        <!-- کارت گردنبندها -->
+        <a href="products.html?cat=necklaces" class="collection-card">
+          <img src="./photos/Mahve Fine Jewelry Necklace Ad.png" alt="Necklaces" />
+          <div class="collection-card__overlay"><h3>Necklaces</h3><span>View Collection</span></div>
+        </a>
+
+        <!-- کارت گوشواره‌ها -->
+        <a href="products.html?cat=earrings" class="collection-card">
+          <img src="./photos/Mahve Fine Jewelry Earrings in Emerald Velvet.png" alt="Earrings" />
+          <div class="collection-card__overlay"><h3>Earrings</h3><span>View Collection</span></div>
+        </a>
+
+        <!-- کارت دستبندها -->
+        <a href="products.html?cat=bracelets" class="collection-card">
+          <img src="./photos/Emerald Velvet Fine Jewelry Bracelet.png" alt="Bracelets" />
+          <div class="collection-card__overlay"><h3>Bracelets</h3><span>View Collection</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       بخش محصولات ویژه (Featured Pieces)
+       شبکه محصولات به‌صورت داینامیک با JS در #featuredGrid پر می‌شود.
+  ============================================================ -->
+  <section class="featured" id="featured">
+    <div class="container">
+
+      <!-- سربرگ بخش -->
+      <div class="section-head">
+        <span class="section-eyebrow">Featured Pieces</span>
+        <h2 class="section-title">Signature Creations</h2>
+      </div>
+
+      <!-- ظرف خالی برای رندر داینامیک محصولات ویژه -->
+      <div class="featured__grid" id="featuredGrid"></div>
+
+      <!-- دکمه مشاهده همه محصولات -->
+      <div class="featured__cta">
+        <a href="products.html" class="btn btn--gold">View All Pieces</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       بخش هنر ساخت (Craftsmanship)
+       چهار مرحله فرآیند ساخت با شماره‌گذاری.
+  ============================================================ -->
+  <section class="craft" id="craft">
+    <div class="container">
+
+      <!-- سربرگ وسط‌چین -->
+      <div class="section-head section-head--center">
+        <span class="section-eyebrow">Craftsmanship</span>
+        <h2 class="section-title">The Art Behind Every Piece</h2>
+      </div>
+
+      <!-- شبکه چهار مرحله‌ای -->
+      <div class="craft__grid">
+
+        <!-- مرحله ۱: طراحی -->
+        <div class="craft__step">
+          <span class="craft__num">01</span>
+          <h3>Design</h3>
+          <p>Every piece begins with a sketch inspired by Persian motifs and modern elegance.</p>
+        </div>
+
+        <!-- مرحله ۲: انتخاب مواد -->
+        <div class="craft__step">
+          <span class="craft__num">02</span>
+          <h3>Selection</h3>
+          <p>Only ethically sourced gemstones and precious metals are chosen for our creations.</p>
+        </div>
+
+        <!-- مرحله ۳: ساخت دستی -->
+        <div class="craft__step">
+          <span class="craft__num">03</span>
+          <h3>Handcraft</h3>
+          <p>Master artisans shape, set, and polish each piece by hand over many hours.</p>
+        </div>
+
+        <!-- مرحله ۴: میراث -->
+        <div class="craft__step">
+          <span class="craft__num">04</span>
+          <h3>Legacy</h3>
+          <p>Delivered in signature packaging, each creation is made to be treasured for generations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       بخش نقل‌قول (Quote)
+       یک نقل‌قول کوتاه و شعار برند.
+  ============================================================ -->
+  <section class="quote">
+    <div class="container">
+      <p class="quote__text">"MAHVE — Beauty for today. A legacy for eternity."</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       بخش تماس (Contact)
+       دو ستون: اطلاعات تماس + فرم ارسال پیام.
+  ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="container contact__grid">
+
+      <!-- ستون اطلاعات تماس -->
+      <div class="contact__info">
+        <span class="section-eyebrow">Visit Us</span>
+        <h2 class="section-title">Our Boutique</h2>
+        <p>Discover our collections in person at our flagship boutique, or reach out for a private appointment.</p>
+
+        <!-- لیست اطلاعات تماس -->
+        <ul class="contact__list">
+          <li><span>Address</span> 23 sarv sharqi saadat Abad Tehran</li>
+          <li><span>Phone</span> +98 9390524448</li>
+          <li><span>Email</span> @mahve.com</li>
+          <li><span>Hours</span> Sat–Thu, 10:00–20:00</li>
+        </ul>
+      </div>
+
+      <!--
+        فرم ارسال پیام.
+        هندلر درون‌خطی onsubmit از ارسال واقعی جلوگیری می‌کند،
+        فرم را ریست می‌کند و یک پیام تشکر نمایش می‌دهد.
+      -->
+      <form class="contact__form" onsubmit="event.preventDefault(); this.reset(); alert('Thank you — we will be in touch.');">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn btn--gold">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       فوتر سایت
+       چهار ستون: برند، لینک‌های کاوش، شبکه‌های اجتماعی، خبرنامه.
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+
+      <!-- ستون برند -->
+      <div class="footer__brand">
+        <span class="footer__logo">MAHVE</span>
+        <p>Born of Heritage, Made for Eternity.</p>
+      </div>
+
+      <!-- ستون لینک‌های کاوش -->
+      <div class="footer__links">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="products.html">Collections</a>
+        <a href="#story">Our Story</a>
+        <a href="#craft">Craftsmanship</a>
+        <a href="#contact">Contact</a>
+        <a href="admin.html">Admin Panel</a>
+      </div>
+
+      <!-- ستون شبکه‌های اجتماعی -->
+      <div class="footer__links">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Pinterest</a>
+        <a href="#">Facebook</a>
+      </div>
+
+      <!-- ستون خبرنامه با فرم اشتراک -->
+      <div class="footer__news">
+        <h4>Newsletter</h4>
+        <p>Receive our latest creations and stories.</p>
+        <form onsubmit="event.preventDefault(); this.reset(); alert('Subscribed!');">
+          <input type="email" placeholder="Email address" required />
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- نوار پایین فوتر -->
+    <div class="footer__bottom">
+      <span>© 2026 MAHVE. All rights reserved.</span>
+      <span>Beauty for today. A legacy for eternity.</span>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       لایه تاریک پشت کشوها (Overlay)
+  ============================================================ -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- ============================================================
+       کشوی کناری سبد خرید (Cart Drawer)
+  ============================================================ -->
+  <aside class="drawer" id="cartDrawer">
+
+    <!-- سربرگ کشو با دکمه بستن -->
+    <div class="drawer__head">
+      <h3>Your Cart</h3>
+      <button class="drawer__close" data-close>&times;</button>
+    </div>
+
+    <!-- نوار پیشرفت ارسال رایگان -->
+    <div class="shipping-bar">
+      <p class="shipping-bar__text" id="shippingText">You're $10,000 away from free shipping</p>
+      <div class="shipping-bar__track"><span class="shipping-bar__fill" id="shippingFill"></span></div>
+    </div>
+
+    <!-- بدنه کشو: لیست آیتم‌های سبد (داینامیک با JS) -->
+    <div class="drawer__body" id="cartItems"></div>
+
+    <!-- پایین کشو: جمع کل + دکمه پرداخت -->
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <a href="checkout.html" class="btn btn--gold btn--full">Checkout</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       کشوی کناری علاقه‌مندی‌ها (Wishlist Drawer)
+  ============================================================ -->
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer__head">
+      <h3>Wishlist</h3>
+      <button class="drawer__close" data-close>&times;</button>
+    </div>
+
+    <!-- بدنه کشو: لیست آیتم‌های علاقه‌مندی (داینامیک با JS) -->
+    <div class="drawer__body" id="wishlistItems"></div>
+  </aside>
+
+  <!-- ============================================================
+       اعلان کوتاه (Toast)
+  ============================================================ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- فایل اسکریپت اصلی سایت -->
+  <script src="script.js"></script>
+</body>
+</html>

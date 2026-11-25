@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — MAHVE</title>
+
+  <!-- پیش‌بارگذاری دامنه‌های فونت گوگل برای کاهش تأخیر اتصال -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- بارگذاری فونت‌های سفارشی سایت (Cinzel / Playfair Display / Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- فایل استایل اصلی سایت -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       هدر صفحه تسویه‌حساب
+       هدر کامل با کلاس nav--solid (پس‌زمینه ثابت).
+       منوی لینک‌ها کمی کوتاه‌تر از صفحه اصلی است (بدون Craftsmanship/Admin).
+  ============================================================ -->
+  <header class="nav nav--solid" id="nav">
+    <div class="nav__inner">
+
+      <!-- لوگوی برند -->
+      <a href="index.html" class="nav__logo">MAHVE</a>
+
+      <!-- منوی لینک‌های اصلی -->
+      <nav class="nav__links">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="products.html" class="nav__link">Collections</a>
+        <a href="index.html#story" class="nav__link">Story</a>
+        <a href="index.html#contact" class="nav__link">Contact</a>
+      </nav>
+
+      <!-- دکمه‌های کنشی هدر -->
+      <div class="nav__actions">
+
+        <!-- دکمه علاقه‌مندی‌ها + شمارنده -->
+        <button class="nav__icon" id="wishlistBtn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+          <span class="badge" id="wishlistCount">0</span>
+        </button>
+
+        <!-- دکمه سبد خرید + شمارنده -->
+        <button class="nav__icon" id="cartBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="badge" id="cartCount">0</span>
+        </button>
+
+        <!-- دکمه منوی همبرگری موبایل -->
+        <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       محتوای اصلی صفحه تسویه‌حساب
+       چیدمان دوستونی: فرم اطلاعات در سمت چپ، خلاصه سفارش در سمت راست.
+  ============================================================ -->
+  <main class="checkout-page">
+    <div class="container">
+      <div class="checkout-page__grid">
+
+        <!-- ========================================================
+             ستون فرم: اطلاعات تماس، آدرس و روش پرداخت
+        ======================================================== -->
+        <form class="checkout-form" id="checkoutForm">
+
+          <!-- عنوان بخش اطلاعات تماس و ارسال -->
+          <h2 class="checkout-form__title">Contact & Shipping</h2>
+
+          <!-- فیلدهای اطلاعات مشتری و آدرس ارسال -->
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="tel" name="phone" placeholder="Phone" required />
+          <input type="text" name="address" placeholder="Address" required />
+          <input type="text" name="city" placeholder="City" required />
+          <input type="text" name="zip" placeholder="Postal Code" required />
+
+          <!-- عنوان بخش روش پرداخت -->
+          <h2 class="checkout-form__title">Payment Method</h2>
+
+          <!-- گزینه پرداخت با کارت (پیش‌فرض انتخاب‌شده) -->
+          <label class="pay-option">
+            <input type="radio" name="pay" value="card" checked />
+            <span>💳 Credit / Debit Card (Demo)</span>
+          </label>
+
+          <!-- گزینه پرداخت در محل -->
+          <label class="pay-option">
+            <input type="radio" name="pay" value="cash" />
+            <span>💰 Cash on Delivery</span>
+          </label>
+
+          <!-- دکمه ادامه فرآیند به صفحه پرداخت -->
+          <button type="submit" class="btn btn--gold btn--full">Continue to Payment</button>
+        </form>
+
+        <!-- ========================================================
+             ستون خلاصه سفارش (Order Summary)
+             مقادیر آیتم‌ها، جمع جزء، هزینه ارسال و مجموع کل
+             به‌صورت داینامیک توسط script.js محاسبه و پر می‌شوند.
+        ======================================================== -->
+        <aside class="checkout-summary">
+
+          <!-- عنوان خلاصه سفارش -->
+          <h3>Order Summary</h3>
+
+          <!-- لیست آیتم‌های سبد خرید (داینامیک با JS) -->
+          <div id="checkoutItems"></div>
+
+          <!-- ردیف جمع جزء (Subtotal) -->
+          <div class="checkout-summary__row"><span>Subtotal</span><strong id="checkoutSubtotal">$0</strong></div>
+
+          <!-- ردیف هزینه ارسال -->
+          <div class="checkout-summary__row"><span>Shipping</span><strong id="checkoutShipping">$0</strong></div>
+
+          <!-- ردیف مجموع کل (با کلاس تأکیدی --total) -->
+          <div class="checkout-summary__row checkout-summary__row--total"><span>Total</span><strong id="checkoutTotal">$0</strong></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       لایه تاریک پشت کشوها (Overlay)
+  ============================================================ -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- ============================================================
+       کشوی کناری سبد خرید (Cart Drawer)
+       در این صفحه نیز در دسترس است تا کاربر بتواند قبل از تکمیل
+       سفارش، سبد خود را بررسی/ویرایش کند.
+  ============================================================ -->
+  <aside class="drawer" id="cartDrawer">
+
+    <!-- سربرگ کشو با دکمه بستن -->
+    <div class="drawer__head"><h3>Your Cart</h3><button class="drawer__close" data-close>&times;</button></div>
+
+    <!-- نوار پیشرفت ارسال رایگان -->
+    <div class="shipping-bar">
+      <p class="shipping-bar__text" id="shippingText">You're $10,000 away from free shipping</p>
+      <div class="shipping-bar__track"><span class="shipping-bar__fill" id="shippingFill"></span></div>
+    </div>
+
+    <!-- بدنه کشو: لیست آیتم‌های سبد (داینامیک با JS) -->
+    <div class="drawer__body" id="cartItems"></div>
+
+    <!-- پایین کشو: جمع کل + دکمه پرداخت -->
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <a href="checkout.html" class="btn btn--gold btn--full">Checkout</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       کشوی کناری علاقه‌مندی‌ها (Wishlist Drawer)
+  ============================================================ -->
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer__head"><h3>Wishlist</h3><button class="drawer__close" data-close>&times;</button></div>
+
+    <!-- بدنه کشو: لیست آیتم‌های علاقه‌مندی (داینامیک با JS) -->
+    <div class="drawer__body" id="wishlistItems"></div>
+  </aside>
+
+  <!-- ============================================================
+       اعلان کوتاه (Toast)
+  ============================================================ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- فایل اسکریپت اصلی سایت -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment — MAHVE</title>
+
+  <!-- پیش‌بارگذاری دامنه‌های فونت گوگل برای کاهش تأخیر اتصال -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- بارگذاری فونت‌های سفارشی سایت (Cinzel / Playfair Display / Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- فایل استایل اصلی سایت -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       هدر صفحه پرداخت
+       نسخه ساده‌شده هدر: فقط لوگو و دو لینک اصلی نمایش داده می‌شود.
+       به‌جای دکمه‌های سبد/علاقه‌مندی، یک برچسب مرحله (Payment) قرار دارد
+       تا کاربر بداند در کدام مرحله از فرآیند خرید است.
+  ============================================================ -->
+  <header class="nav nav--solid" id="nav">
+    <div class="nav__inner">
+
+      <!-- لوگوی برند با لینک به صفحه اصلی -->
+      <a href="index.html" class="nav__logo">MAHVE</a>
+
+      <!-- منوی محدود: فقط خانه و مجموعه‌ها -->
+      <nav class="nav__links">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="products.html" class="nav__link">Collections</a>
+      </nav>
+
+      <!-- جایگزین دکمه‌های کنشی: نمایش برچسب مرحله پرداخت -->
+      <div class="nav__actions">
+        <span class="nav__step">Payment</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       محتوای اصلی صفحه پرداخت
+  ============================================================ -->
+  <main class="payment-page">
+    <div class="container payment-page__inner">
+
+      <!-- کارت مرکزی فرم پرداخت -->
+      <div class="payment-card">
+
+        <!-- برچسب بالای عنوان (تأکید بر دمو بودن پرداخت) -->
+        <span class="payment-card__eyebrow">Secure Demo Payment</span>
+
+        <!-- عنوان اصلی فرم -->
+        <h1 class="payment-card__title">Enter Card Details</h1>
+
+        <!-- یادداشت هشدار: این پرداخت واقعی نیست -->
+        <p class="payment-card__note">This is a demo. No real payment will be processed.</p>
+
+        <!--
+          فرم پرداخت.
+          ارسال فرم توسط script.js مدیریت می‌شود (event listener روی #paymentForm).
+          فیلدها با ویژگی required اجباری شده‌اند و maxlength طول ورودی را محدود می‌کند.
+        -->
+        <form id="paymentForm" class="payment-form">
+
+          <!-- نام صاحب کارت -->
+          <input type="text" name="cardName" placeholder="Name on Card" required />
+
+          <!-- شماره کارت (حداکثر ۱۹ کاراکتر شامل فاصله) -->
+          <input type="text" name="cardNumber" placeholder="Card Number" maxlength="19" required />
+
+          <!-- ردیف تاریخ انقضا و CVV در کنار هم -->
+          <div class="payment-form__row">
+            <input type="text" name="expiry" placeholder="MM/YY" maxlength="5" required />
+            <input type="text" name="cvv" placeholder="CVV" maxlength="4" required />
+          </div>
+
+          <!-- نمایش مبلغ قابل پرداخت (مقدار با JS از سبد خرید خوانده می‌شود) -->
+          <div class="payment-form__amount">
+            <span>Amount to Pay</span>
+            <strong id="payAmount">$0</strong>
+          </div>
+
+          <!-- دکمه ارسال فرم / پرداخت -->
+          <button type="submit" class="btn btn--gold btn--full">Pay Now</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       اعلان کوتاه (Toast)
+       برای نمایش پیام‌هایی مثل «پرداخت موفق» یا خطای اعتبارسنجی.
+  ============================================================ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- فایل اسکریپت اصلی سایت (مدیریت فرم پرداخت، خواندن مبلغ سبد و ...) -->
+  <script src="script.js"></script>
+</body>
+</html>

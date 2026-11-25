@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — MAHVE</title>
+
+  <!-- پیش‌بارگذاری دامنه‌های فونت گوگل برای کاهش تأخیر اتصال -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- بارگذاری فونت‌های سفارشی سایت (Cinzel / Playfair Display / Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- فایل استایل اصلی سایت -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       هدر پنل مدیریت
+       هدر ساده‌شده: بدون دکمه‌های سبد/علاقه‌مندی؛
+       به‌جای آن برچسب مرحله (Admin) نمایش داده می‌شود.
+  ============================================================ -->
+  <header class="nav nav--solid" id="nav">
+    <div class="nav__inner">
+
+      <!-- لوگوی برند -->
+      <a href="index.html" class="nav__logo">MAHVE</a>
+
+      <!-- منوی محدود (بدون Admin چون همین صفحه است) -->
+      <nav class="nav__links">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="products.html" class="nav__link">Collections</a>
+        <a href="index.html#story" class="nav__link">Story</a>
+        <a href="index.html#contact" class="nav__link">Contact</a>
+      </nav>
+
+      <!-- برچسب مرحله + دکمه منوی موبایل -->
+      <div class="nav__actions">
+        <span class="nav__step">Admin</span>
+        <button class="nav__toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       محتوای اصلی پنل مدیریت
+       شامل دو حالت مجزا: صفحه ورود (Login) و داشبورد (Dashboard).
+       فقط یکی از این دو در هر لحظه نمایش داده می‌شود.
+  ============================================================ -->
+  <main class="admin-page">
+    <div class="container">
+
+      <!-- ========================================================
+           بخش ورود (Login)
+           در ابتدا نمایش داده می‌شود. پس از ورود موفق با ایمیل
+           admin@mahve.com، این بخش مخفی و داشبورد نمایش داده می‌شود.
+      ======================================================== -->
+      <div class="admin-login" id="adminLogin">
+        <div class="admin-login__card">
+
+          <!-- برچسب و عنوان صفحه ورود -->
+          <span class="section-eyebrow">Admin Access</span>
+          <h1 class="section-title">Welcome Back</h1>
+
+          <!-- راهنمای ورود دمو: ایمیل مجاز -->
+          <p class="admin-login__hint">
+            Demo access — enter email: <code>admin@mahve.com</code>
+          </p>
+
+          <!-- فرم ورود: فقط فیلد ایمیل -->
+          <form id="adminLoginForm">
+            <input type="email" id="adminEmail" placeholder="Admin Email" required />
+            <button type="submit" class="btn btn--gold btn--full">Enter Dashboard</button>
+          </form>
+
+          <!-- لینک بازگشت به صفحه اصلی -->
+          <p class="admin-login__back"><a href="index.html">← Back to Home</a></p>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           بخش داشبورد (Dashboard)
+           در ابتدا با style="display:none" مخفی است و پس از
+           ورود موفق نمایش داده می‌شود.
+      ======================================================== -->
+      <div class="admin-dashboard" id="adminDashboard" style="display:none">
+
+        <!-- سربرگ داشبورد: عنوان + دکمه‌های بازگشت و خروج -->
+        <div class="admin-dashboard__head">
+          <div>
+            <span class="section-eyebrow">Admin</span>
+            <h1 class="section-title">Dashboard</h1>
+          </div>
+          <div class="admin-dashboard__actions">
+            <a href="index.html" class="btn btn--ghost">← Home</a>
+            <button class="btn btn--gold" id="adminLogout">Logout</button>
+          </div>
+        </div>
+
+        <!-- ====================================================
+             تب‌های داشبورد
+             دو تب: محصولات (پیش‌فرض فعال) و مخاطبین.
+             جابه‌جایی بین تب‌ها با JS و کلاس is-active انجام می‌شود.
+        ==================================================== -->
+        <div class="admin-tabs">
+          <button class="admin-tab is-active" data-tab="products">Products</button>
+          <button class="admin-tab"           data-tab="contacts">Contacts</button>
+        </div>
+
+        <!-- ====================================================
+             پنل تب محصولات (Products)
+             چیدمان دوستونی: فرم افزودن محصول + لیست محصولات موجود.
+        ==================================================== -->
+        <div class="admin-tab-panel is-active" id="tab-products">
+          <div class="admin-layout">
+
+            <!-- ستون فرم: افزودن محصول جدید -->
+            <aside class="admin-form-wrap">
+              <h2 class="admin-form__title">Add New Product</h2>
+
+              <form class="admin-form" id="adminAddForm">
+
+                <!-- نام محصول -->
+                <input type="text"   id="newName"  placeholder="Product Name" required />
+
+                <!-- انتخاب دسته‌بندی محصول -->
+                <select id="newCat" required>
+                  <option value="rings">Rings</option>
+                  <option value="necklaces">Necklaces</option>
+                  <option value="earrings">Earrings</option>
+                  <option value="bracelets">Bracelets</option>
+                  <option value="sets">Sets</option>
+                </select>
+
+                <!-- قیمت محصول به دلار -->
+                <input type="number" id="newPrice" placeholder="Price (USD)" min="0" step="1" required />
+
+                <!-- مسیر تصویر محصول -->
+                <input type="text"   id="newImg"   placeholder="Image path (e.g. photos/name.png)" required />
+
+                <!-- برچسب اختیاری (New, Limited و ...) -->
+                <input type="text"   id="newBadge" placeholder="Badge (optional: New, Limited...)" />
+
+                <!-- توضیحات اختیاری محصول -->
+                <textarea id="newDesc" placeholder="Description (optional)" rows="3"></textarea>
+
+                <!-- دکمه ثبت محصول -->
+                <button type="submit" class="btn btn--gold btn--full">Add Product</button>
+              </form>
+
+              <!-- دکمه بازنویسی محصولات به حالت پیش‌فرض -->
+              <button class="btn btn--ghost btn--full" id="adminReset" style="margin-top:1rem">
+                Reset Defaults
+              </button>
+            </aside>
+
+            <!-- ستون لیست: نمایش تمام محصولات موجود -->
+            <section class="admin-list-wrap">
+              <h2 class="admin-form__title">All Products (<span id="adminCount">0</span>)</h2>
+
+              <!-- ظرف لیست محصولات (داینامیک با JS) -->
+              <div class="admin-product-list" id="adminProductList"></div>
+            </section>
+
+          </div>
+        </div>
+
+        <!-- ====================================================
+             پنل تب مخاطبین (Contacts)
+             چیدمان دوستونی: فرم ثبت مخاطب + لیست مخاطبین با جستجو.
+        ==================================================== -->
+        <div class="admin-tab-panel" id="tab-contacts">
+          <div class="admin-layout">
+
+            <!-- ستون فرم: ثبت مخاطب جدید -->
+            <aside class="admin-form-wrap">
+              <h2 class="admin-form__title">Add New Contact</h2>
+
+              <!-- novalidate: اعتبارسنجی بومی مرورگر غیرفعال شده
+                   تا اعتبارسنجی سفارشی در JS اعمال شود -->
+              <form class="admin-form" id="contactForm" novalidate>
+                <input type="text"  id="cName"  placeholder="Full Name"     required />
+                <input type="tel"   id="cPhone" placeholder="Phone Number"  required />
+                <input type="email" id="cEmail" placeholder="Email Address" required />
+                <button type="submit" class="btn btn--gold btn--full">Register Contact</button>
+              </form>
+            </aside>
+
+            <!-- ستون لیست: نمایش مخاطبین با امکان جستجو -->
+            <section class="admin-list-wrap">
+              <div class="admin-list-head">
+                <h2 class="admin-form__title">All Contacts (<span id="contactsCount">0</span>)</h2>
+
+                <!-- فیلد جستجوی زنده مخاطبین -->
+                <input type="text" id="contactsSearch" class="admin-search" placeholder="Search..." />
+              </div>
+
+              <!-- ظرف لیست مخاطبین (داینامیک با JS) -->
+              <div class="admin-contact-list" id="contactsList"></div>
+            </section>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       مودال تأیید (Confirm Dialog)
+       برای تأیید عملیات حساس (مثل حذف محصول یا مخاطب) استفاده می‌شود.
+       شامل لایه تاریک (Overlay) و جعبه پیام با دکمه‌های Cancel/Confirm.
+  ============================================================ -->
+  <div class="confirm-modal" id="confirmModal">
+
+    <!-- لایه تاریک پشت مودال -->
+    <div class="confirm-modal__overlay" id="confirmOverlay"></div>
+
+    <!-- جعبه اصلی مودال -->
+    <div class="confirm-modal__box">
+      <h3 class="confirm-modal__title">Are you sure?</h3>
+
+      <!-- متن پویا: با JS بر اساس نوع عملیات تغییر می‌کند -->
+      <p class="confirm-modal__text" id="confirmText">This action cannot be undone.</p>
+
+      <!-- دکمه‌های انصراف و تأیید -->
+      <div class="confirm-modal__actions">
+        <button class="btn btn--ghost" id="confirmCancel">Cancel</button>
+        <button class="btn btn--gold"  id="confirmOk">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       مودال ویرایش مخاطب (Edit Contact Modal)
+       برای ویرایش اطلاعات یک مخاطب موجود استفاده می‌شود.
+       فرم داخل مودال شامل نام، تلفن و ایمیل است.
+  ============================================================ -->
+  <div class="contacts-modal" id="editContactModal">
+
+    <!-- لایه تاریک پشت مودال -->
+    <div class="contacts-modal__overlay" id="editContactOverlay"></div>
+
+    <!-- جعبه اصلی مودال -->
+    <div class="contacts-modal__box">
+
+      <!-- سربرگ مودال: عنوان + دکمه بستن -->
+      <div class="contacts-modal__head">
+        <h3>Edit Contact</h3>
+        <button class="contacts-modal__close" id="editContactClose" aria-label="Close">&times;</button>
+      </div>
+
+      <!-- فرم ویرایش مخاطب -->
+      <form class="admin-form" id="editContactForm" style="padding:1.4rem">
+        <input type="text"  id="eName"  placeholder="Full Name"    required />
+        <input type="tel"   id="ePhone" placeholder="Phone Number" required />
+        <input type="email" id="eEmail" placeholder="Email Address" required />
+        <button type="submit" class="btn btn--gold btn--full">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       اعلان کوتاه (Toast)
+       برای پیام‌هایی مثل «محصول اضافه شد» یا «خطا در ثبت».
+  ============================================================ -->
+  <div class="toast" id="toast"></div>
+
+  <!-- فایل اسکریپت اصلی سایت (مدیریت ورود، تب‌ها، CRUD محصولات و مخاطبین) -->
+  <script src="script.js"></script>
+</body>
+</html>
